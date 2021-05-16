@@ -7,11 +7,13 @@ const app = express();
 // The old version of Express which is 4.15 and below, need to use express.json() instead bodyParser.json(). This is because bodyParser deprecated.
 // app.use(bodyParser.json())
 
+// set the cors first
+app.use(cors({}));
+//after that set parse to json
 app.use(express.json());
 require("./config/mongoose.js")(app);
 require('./routeHandler')(app);
 app.use(morgan('dev'));
-app.use(cors());
 
 app.get('/', (req, res) => {
     res.json({
